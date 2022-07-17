@@ -13,7 +13,9 @@ const login = async (req, res, next) => {
     if (!user) {
       throw getError(401, "Email or password is wrong");
     }
-
+    if (!user.verify) {
+      throw getError(401, "Email not verify");
+    }
     if (!(await bcrypt.compare(password, user.password))) {
       throw getError(401, "Email or password is wrong");
     }

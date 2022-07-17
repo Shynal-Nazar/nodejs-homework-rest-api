@@ -7,6 +7,10 @@ const router = express.Router();
 
 router.post("/signup", validation(schemas.register), ctrl.register);
 
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post("/verify", validation(schemas.email), ctrl.resendVerifyEmail);
+
 router.post("/signin", validation(schemas.register), ctrl.login);
 
 router.get("/current", authMiddlewar, ctrl.getCurrent);
